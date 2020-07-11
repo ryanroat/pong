@@ -14,10 +14,18 @@ window.onload = () => {
     let ballSpeedX = 8;
     let ballSpeedY = 4;
 
-    // draw canvas rectangle of given size and color
+    // draw canvas rectangle of given location, size and color
     function colorRect(leftX, topY, width, height, drawColor) {
         canvasContext.fillStyle = drawColor;
         canvasContext.fillRect(leftX, topY, width, height);
+    }
+
+    // draw canvas circle of given location, radius and color
+    function colorCircle(centerX, centerY, radius, color) {
+        canvasContext.fillStyle = color;
+        canvasContext.beginPath();
+        canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+        canvasContext.fill();
     }
 
     // updates canvas
@@ -26,12 +34,8 @@ window.onload = () => {
         colorRect(0, 0, canvas.width, canvas.height, 'black');
         // draw left player paddle
         colorRect(0, 210, 10, 100, 'white');
-        // draw red 'ball'
-        // colorRect(ballX, ballY, ballSize, ballSize, 'red');
-        canvasContext.fillStyle = 'red';
-        canvasContext.beginPath();
-        canvasContext.arc(ballX, ballY, ballRadius, 0, Math.PI * 2, true);
-        canvasContext.fill();
+        // draw white ball
+        colorCircle(ballX, ballY, ballRadius, 'white');
         // move ball by x vector
         ballX += ballSpeedX;
         // if ball hits edge of field, reverse x vector
