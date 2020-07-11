@@ -9,7 +9,7 @@ window.onload = () => {
     // initial location and size of ball
     let ballX = 50;
     let ballY = 50;
-    const ballSize = 16;
+    const ballRadius = 10;
     // initial ball vectors
     let ballSpeedX = 8;
     let ballSpeedY = 4;
@@ -27,17 +27,21 @@ window.onload = () => {
         // draw left player paddle
         colorRect(0, 210, 10, 100, 'white');
         // draw red 'ball'
-        colorRect(ballX, ballY, ballSize, ballSize, 'red');
+        // colorRect(ballX, ballY, ballSize, ballSize, 'red');
+        canvasContext.fillStyle = 'red';
+        canvasContext.beginPath();
+        canvasContext.arc(ballX, ballY, ballRadius, 0, Math.PI * 2, true);
+        canvasContext.fill();
         // move ball by x vector
         ballX += ballSpeedX;
         // if ball hits edge of field, reverse x vector
-        if (ballX < 1 || ballX > canvas.width - ballSize) {
+        if (ballX < ballRadius || ballX > canvas.width - ballRadius) {
             ballSpeedX *= -1;
         }
         // move ball by y vector
         ballY += ballSpeedY;
         // if ball hits edge of field, reverse y vector
-        if (ballY < 1 || ballY > canvas.height - ballSize) {
+        if (ballY < ballRadius || ballY > canvas.height - ballRadius) {
             ballSpeedY *= -1;
         }
         // console.log(ballX, ballSpeedX, ballY, ballSpeedY);
