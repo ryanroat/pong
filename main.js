@@ -17,11 +17,11 @@ window.onload = () => {
         canvasContext.fillStyle = 'red';
         canvasContext.fillRect(ballX, ballY, ballSize, ballSize);
         ballX += ballSpeedX;
-        if (ballX < 1 || ballX > 800 - ballSize) {
+        if (ballX < 1 || ballX > canvas.width - ballSize) {
             ballSpeedX *= -1;
         }
         ballY += ballSpeedY;
-        if (ballY < 1 || ballY > 600 - ballSize) {
+        if (ballY < 1 || ballY > canvas.height - ballSize) {
             ballSpeedY *= -1;
         }
         console.log(ballX, ballSpeedX, ballY, ballSpeedY);
