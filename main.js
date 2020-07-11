@@ -11,11 +11,15 @@ window.onload = () => {
     let ballSpeedX = 8;
     let ballSpeedY = 4;
 
+    function colorRect(leftX, topY, width, height, drawColor) {
+        canvasContext.fillStyle = drawColor;
+        canvasContext.fillRect(leftX, topY, width, height);
+    }
+
     drawField = () => {
-        canvasContext.fillStyle = 'black';
-        canvasContext.fillRect(0, 0, canvas.width, canvas.height);
-        canvasContext.fillStyle = 'red';
-        canvasContext.fillRect(ballX, ballY, ballSize, ballSize);
+        colorRect(0, 0, canvas.width, canvas.height, 'black');
+        colorRect(0, 210, 10, 100, 'white');
+        colorRect(ballX, ballY, ballSize, ballSize, 'red');
         ballX += ballSpeedX;
         if (ballX < 1 || ballX > canvas.width - ballSize) {
             ballSpeedX *= -1;
