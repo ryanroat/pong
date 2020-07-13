@@ -4,16 +4,16 @@ const canvasContext = canvas.getContext('2d');
 // target frames per second rate
 const FPS = 30;
 // initial location and size of ball
-let ballX = 50;
-let ballY = 50;
+let ballX = canvas.width / 2;
+let ballY = canvas.height / 2;
 const ballRadius = 10;
 // initial ball vectors
 let ballSpeedX = 8;
 let ballSpeedY = 4;
 
 // paddle details
-let paddle1Y = 250;
 const paddle1Height = 100;
+let paddle1Y = canvas.height / 2 - paddle1Height / 2;
 
 // mouse position
 
@@ -41,6 +41,11 @@ function colorCircle(centerX, centerY, radius, drawColor) {
     canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
     canvasContext.fill();
 }
+// reset ball location to center of canvas
+function ballReset() {
+    ballX = canvas.width / 2;
+    ballY = canvas.height / 2;
+}
 
 window.onload = () => {
     console.log('document loaded');
@@ -54,8 +59,12 @@ window.onload = () => {
         colorCircle(ballX, ballY, ballRadius, 'white');
         // move ball by x vector
         ballX += ballSpeedX;
+        // rest ball location if it reaches left edge
+        if (ballX < -ballRadius) {
+            ballReset();
+        }
         // if ball hits edge of field, reverse x vector
-        if (ballX < ballRadius || ballX > canvas.width - ballRadius) {
+        if (/* ballX < ballRadius || */ ballX > canvas.width - ballRadius) {
             ballSpeedX *= -1;
         }
         // move ball by y vector
