@@ -12,6 +12,7 @@ let ballSpeedX = 8;
 let ballSpeedY = 4;
 
 // paddle details
+const paddleWidth = 10;
 const paddle1Height = 100;
 let paddle1Y = canvas.height / 2 - paddle1Height / 2;
 const paddle2Height = 100;
@@ -58,9 +59,15 @@ window.onload = () => {
         // draw blank black playing field
         colorRect(0, 0, canvas.width, canvas.height, 'black');
         // draw left player paddle
-        colorRect(0, paddle1Y, 10, paddle1Height, 'white');
+        colorRect(0, paddle1Y, paddleWidth, paddle1Height, 'white');
         // draw right player paddle
-        colorRect(canvas.width - 10, paddle2Y, 10, paddle2Height, 'white');
+        colorRect(
+            canvas.width - paddleWidth,
+            paddle2Y,
+            paddleWidth,
+            paddle2Height,
+            'white'
+        );
         // draw white ball
         colorCircle(ballX, ballY, ballRadius, 'white');
         // move ball by x vector
