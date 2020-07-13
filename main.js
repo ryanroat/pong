@@ -49,7 +49,7 @@ window.onload = () => {
         // draw blank black playing field
         colorRect(0, 0, canvas.width, canvas.height, 'black');
         // draw left player paddle
-        colorRect(0, 210, 10, 100, 'white');
+        colorRect(0, paddle1Y, 10, paddle1Height, 'white');
         // draw white ball
         colorCircle(ballX, ballY, ballRadius, 'white');
         // move ball by x vector
@@ -71,6 +71,6 @@ window.onload = () => {
 
     canvas.addEventListener('mousemove', function(evt) {
         const mousePos = calcMousePos(evt);
-        paddle1Y = mousePos.y;
+        paddle1Y = mousePos.y - paddle1Height / 2;
     });
 };
