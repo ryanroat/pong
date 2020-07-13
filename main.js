@@ -43,6 +43,8 @@ function colorCircle(centerX, centerY, radius, drawColor) {
 }
 // reset ball location to center of canvas
 function ballReset() {
+    ballSpeedX *= -1;
+    // TODO: need random ballSpeedY here
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
 }
@@ -60,8 +62,12 @@ window.onload = () => {
         // move ball by x vector
         ballX += ballSpeedX;
         // rest ball location if it reaches left edge
-        if (ballX < -ballRadius) {
-            ballReset();
+        if (ballX < 0) {
+            if (ballY > paddle1Y && ballY < paddle1Y + paddle1Height) {
+                ballSpeedX *= -1;
+            } else {
+                ballReset();
+            }
         }
         // if ball hits edge of field, reverse x vector
         if (/* ballX < ballRadius || */ ballX > canvas.width - ballRadius) {
