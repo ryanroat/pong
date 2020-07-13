@@ -12,7 +12,7 @@ let ballSpeedX = 8;
 let ballSpeedY = 4;
 
 // paddle details
-const paddle1Y = 250;
+let paddle1Y = 250;
 const paddle1Height = 100;
 
 // mouse position
@@ -68,4 +68,9 @@ window.onload = () => {
     };
     // draw field at FPS rate
     setInterval(drawField, 1000 / FPS);
+
+    canvas.addEventListener('mousemove', function(evt) {
+        const mousePos = calcMousePos(evt);
+        paddle1Y = mousePos.y;
+    });
 };
