@@ -14,6 +14,10 @@ window.onload = () => {
     let ballSpeedX = 8;
     let ballSpeedY = 4;
 
+    // paddle details
+    const paddle1Y = 250;
+    const paddle1Height = 100;
+
     // draw canvas rectangle of given location, size and color
     function colorRect(leftX, topY, width, height, drawColor) {
         canvasContext.fillStyle = drawColor;
