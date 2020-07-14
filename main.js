@@ -18,6 +18,10 @@ let paddle1Y = canvas.height / 2 - paddle1Height / 2;
 const paddle2Height = 100;
 let paddle2Y = canvas.height / 2 - paddle1Height / 2;
 
+// score vars
+let player1Score = 0;
+let player2Score = 0;
+
 // returns a 'random' number btwn 1 and max inclusive
 function rando(max) {
     return Math.floor(Math.random() * Math.floor(max)) + 1;
@@ -87,6 +91,9 @@ function drawField() {
     );
     // draw white ball
     colorCircle(ballX, ballY, ballRadius, 'white');
+    // display scores
+    canvasContext.fillText(player1Score, 100, 100);
+    canvasContext.fillText(player2Score, canvas.width - 100, 100);
 }
 
 function computerMove() {
@@ -113,6 +120,8 @@ function movement() {
         if (ballY > paddle1Y && ballY < paddle1Y + paddle1Height) {
             ballSpeedX *= -1;
         } else {
+            // point to player 2
+            player2Score++;
             ballReset();
         }
     }
@@ -121,6 +130,8 @@ function movement() {
         if (ballY > paddle2Y && ballY < paddle2Y + paddle2Height) {
             ballSpeedX *= -1;
         } else {
+            // point to player 1
+            player1Score++;
             ballReset();
         }
     }
