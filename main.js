@@ -4,12 +4,13 @@ const canvasContext = canvas.getContext('2d');
 // target frames per second rate
 const FPS = 30;
 // initial location and size of ball
-let ballX = canvas.width / 2;
-let ballY = canvas.height / 2;
+let ballX; //= canvas.width / 2;
+let ballY; //= canvas.height / 2;
 const ballRadius = 10;
 // initial ball vectors
-let ballSpeedX = 8;
-let ballSpeedY = 4;
+let ballSpeedX; //= rando(6) + 9 * (Math.random() < 0.5 ? -1 : 1);
+
+let ballSpeedY; //= 4;
 
 // paddle details
 const paddleWidth = 10;
@@ -51,6 +52,14 @@ function colorCircle(centerX, centerY, radius, drawColor) {
 }
 
 // initialize ball speed and direction
+function ballInit() {
+    // radomize ballSpeed X between 10 & 15
+    ballSpeedX = rando(6) + 9 * (Math.random() < 0.5 ? -1 : 1);
+    // randomize ballSpeedY between -10 & 10
+    ballSpeedY = rando(21) - 11;
+    ballX = canvas.width / 2;
+    ballY = canvas.height / 2;
+}
 
 // reset ball location to center of canvas
 function ballReset() {
@@ -64,6 +73,7 @@ function ballReset() {
 
 window.onload = () => {
     console.log('document loaded');
+    ballInit();
     // updates canvas
     drawField = () => {
         // draw blank black playing field
