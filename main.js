@@ -18,6 +18,11 @@ let paddle1Y = canvas.height / 2 - paddle1Height / 2;
 const paddle2Height = 100;
 const paddle2Y = canvas.height / 2 - paddle1Height / 2;
 
+// returns a 'random' number btwn 1 and max inclusive
+function rando(max) {
+    return Math.floor(Math.random() * Math.floor(max)) + 1;
+}
+
 // mouse position
 
 function calcMousePos(evt) {
@@ -44,10 +49,15 @@ function colorCircle(centerX, centerY, radius, drawColor) {
     canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
     canvasContext.fill();
 }
+
+// initialize ball speed and direction
+
 // reset ball location to center of canvas
 function ballReset() {
+    // reverse ballSpeedX
     ballSpeedX *= -1;
-    // TODO: need random ballSpeedY here
+    // randomize ballSpeedY between -10 & 10
+    ballSpeedY = rando(21) - 11;
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
 }
