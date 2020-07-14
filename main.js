@@ -16,7 +16,7 @@ const paddleWidth = 10;
 const paddle1Height = 100;
 let paddle1Y = canvas.height / 2 - paddle1Height / 2;
 const paddle2Height = 100;
-const paddle2Y = canvas.height / 2 - paddle1Height / 2;
+let paddle2Y = canvas.height / 2 - paddle1Height / 2;
 
 // returns a 'random' number btwn 1 and max inclusive
 function rando(max) {
@@ -89,7 +89,23 @@ function drawField() {
     colorCircle(ballX, ballY, ballRadius, 'white');
 }
 
+function computerMove() {
+    const paddle2YCenter = paddle2Y + paddle2Height / 2;
+
+    if (paddle2YCenter < ballY - 100) {
+        paddle2Y += 25;
+    } else if (paddle2YCenter < ballY - 35) {
+        paddle2Y += 10;
+    } else if (paddle2YCenter > ballY + 100) {
+        paddle2Y -= 25;
+    } else if (paddle2YCenter > ballY + 35) {
+        paddle2Y -= 10;
+    }
+}
+
 function movement() {
+    computerMove();
+
     // move ball by x vector
     ballX += ballSpeedX;
     // reset ball location if it reaches left edge
