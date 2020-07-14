@@ -4,12 +4,13 @@ const canvasContext = canvas.getContext('2d');
 // target frames per second rate
 const FPS = 30;
 // initial location and size of ball
-let ballX = canvas.width / 2;
-let ballY = canvas.height / 2;
+let ballX; //= canvas.width / 2;
+let ballY; //= canvas.height / 2;
 const ballRadius = 10;
 // initial ball vectors
-let ballSpeedX = 8;
-let ballSpeedY = 4;
+let ballSpeedX; //= rando(6) + 9 * (Math.random() < 0.5 ? -1 : 1);
+
+let ballSpeedY; //= 4;
 
 // paddle details
 const paddleWidth = 10;
@@ -17,6 +18,11 @@ const paddle1Height = 100;
 let paddle1Y = canvas.height / 2 - paddle1Height / 2;
 const paddle2Height = 100;
 const paddle2Y = canvas.height / 2 - paddle1Height / 2;
+
+// returns a 'random' number btwn 1 and max inclusive
+function rando(max) {
+    return Math.floor(Math.random() * Math.floor(max)) + 1;
+}
 
 // mouse position
 
@@ -44,16 +50,30 @@ function colorCircle(centerX, centerY, radius, drawColor) {
     canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
     canvasContext.fill();
 }
+
+// initialize ball speed and direction
+function ballInit() {
+    // radomize ballSpeed X between 10 & 15
+    ballSpeedX = rando(6) + 9 * (Math.random() < 0.5 ? -1 : 1);
+    // randomize ballSpeedY between -10 & 10
+    ballSpeedY = rando(21) - 11;
+    ballX = canvas.width / 2;
+    ballY = canvas.height / 2;
+}
+
 // reset ball location to center of canvas
 function ballReset() {
+    // reverse ballSpeedX
     ballSpeedX *= -1;
-    // TODO: need random ballSpeedY here
+    // randomize ballSpeedY between -10 & 10
+    ballSpeedY = rando(21) - 11;
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
 }
 
 window.onload = () => {
     console.log('document loaded');
+    ballInit();
     // updates canvas
     drawField = () => {
         // draw blank black playing field
