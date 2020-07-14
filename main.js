@@ -99,14 +99,14 @@ function drawField() {
 function computerMove() {
     const paddle2YCenter = paddle2Y + paddle2Height / 2;
 
-    if (paddle2YCenter < ballY - 100) {
-        paddle2Y += 25;
-    } else if (paddle2YCenter < ballY - 35) {
-        paddle2Y += 10;
-    } else if (paddle2YCenter > ballY + 100) {
-        paddle2Y -= 25;
-    } else if (paddle2YCenter > ballY + 35) {
-        paddle2Y -= 10;
+    if (paddle2YCenter < ballY - 125) {
+        paddle2Y += 20;
+    } else if (paddle2YCenter < ballY - 30) {
+        paddle2Y += 7;
+    } else if (paddle2YCenter > ballY + 125) {
+        paddle2Y -= 20;
+    } else if (paddle2YCenter > ballY + 30) {
+        paddle2Y -= 7;
     }
 }
 
