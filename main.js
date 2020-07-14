@@ -119,6 +119,8 @@ function movement() {
     if (ballX < 0) {
         if (ballY > paddle1Y && ballY < paddle1Y + paddle1Height) {
             ballSpeedX *= -1;
+            const deltaY = ballY - (paddle1Y + paddle1Height / 2);
+            ballSpeedY = deltaY * 0.35;
         } else {
             // point to player 2
             player2Score++;
@@ -129,6 +131,8 @@ function movement() {
     if (ballX > canvas.width) {
         if (ballY > paddle2Y && ballY < paddle2Y + paddle2Height) {
             ballSpeedX *= -1;
+            const deltaY = ballY - (paddle2Y + paddle2Height / 2);
+            ballSpeedY = deltaY * 0.35;
         } else {
             // point to player 1
             player1Score++;
