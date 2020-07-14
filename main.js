@@ -3,14 +3,12 @@ const canvasContext = canvas.getContext('2d');
 
 // target frames per second rate
 const FPS = 30;
-// initial location and size of ball
-let ballX; //= canvas.width / 2;
-let ballY; //= canvas.height / 2;
+// initialize ball control variables
+let ballX;
+let ballY;
 const ballRadius = 10;
-// initial ball vectors
-let ballSpeedX; //= rando(6) + 9 * (Math.random() < 0.5 ? -1 : 1);
-
-let ballSpeedY; //= 4;
+let ballSpeedX;
+let ballSpeedY;
 
 // paddle details
 const paddleWidth = 10;
@@ -73,6 +71,7 @@ function ballReset() {
 
 window.onload = () => {
     console.log('document loaded');
+    //
     ballInit();
     // updates canvas
     drawField = () => {
@@ -92,7 +91,7 @@ window.onload = () => {
         colorCircle(ballX, ballY, ballRadius, 'white');
         // move ball by x vector
         ballX += ballSpeedX;
-        // rest ball location if it reaches left edge
+        // reset ball location if it reaches left edge
         if (ballX < 0) {
             if (ballY > paddle1Y && ballY < paddle1Y + paddle1Height) {
                 ballSpeedX *= -1;
@@ -100,21 +99,27 @@ window.onload = () => {
                 ballReset();
             }
         }
-        // if ball hits edge of field, reverse x vector
-        if (/* ballX < ballRadius || */ ballX > canvas.width - ballRadius) {
-            ballSpeedX *= -1;
+        // reset ball location if it reaches right edge
+        if (ballX > canvas.width) {
+            if (ballY > paddle2Y && ballY < paddle2Y + paddle2Height) {
+                ballSpeedX *= -1;
+            } else {
+                ballReset();
+            }
         }
+
         // move ball by y vector
         ballY += ballSpeedY;
         // if ball hits edge of field, reverse y vector
         if (ballY < ballRadius || ballY > canvas.height - ballRadius) {
             ballSpeedY *= -1;
         }
-        // console.log(ballX, ballSpeedX, ballY, ballSpeedY);
     };
+
     // draw field at FPS rate
     setInterval(drawField, 1000 / FPS);
 
+    // move paddle1 to track mouse
     canvas.addEventListener('mousemove', function(evt) {
         const mousePos = calcMousePos(evt);
         paddle1Y = mousePos.y - paddle1Height / 2;
