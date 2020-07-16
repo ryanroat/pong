@@ -21,6 +21,8 @@ let paddle2Y = canvas.height / 2 - paddle1Height / 2;
 // score vars
 let player1Score = 0;
 let player2Score = 0;
+const winningScore = 3;
+let showingWinScreen = false;
 
 // returns a 'random' number btwn 1 and max inclusive
 function rando(max) {
@@ -68,6 +70,10 @@ function ballInit() {
 
 // reset ball location to center of canvas
 function ballReset() {
+    // check for winning score
+    if (player1Score === winningScore || player2Score === winningScore) {
+        showingWinScreen = true;
+    }
     // reverse ballSpeedX
     ballSpeedX = -(ballSpeedX / Math.abs(ballSpeedX)) * (rando(6) + 9);
     // randomize ballSpeedY between -10 & 10
@@ -79,6 +85,18 @@ function ballReset() {
 function drawField() {
     // draw blank black playing field
     colorRect(0, 0, canvas.width, canvas.height, 'black');
+    // check for game over situation
+    if (showingWinScreen) {
+        canvasContext.fillStyle = 'white';
+
+        canvasContext.fillText(
+            'GAME OVER - click to continue',
+            canvas.width / 2 - 50,
+            100
+        );
+
+        return;
+    }
     // draw left player paddle
     colorRect(0, paddle1Y, paddleWidth, paddle1Height, 'white');
     // draw right player paddle
@@ -111,13 +129,19 @@ function computerMove() {
 }
 
 function movement() {
+    if (showingWinScreen) {
+        return;
+    }
     computerMove();
 
     // move ball by x vector
     ballX += ballSpeedX;
     // reset ball location if it reaches left edge
     if (ballX < 0) {
-        if (ballY > paddle1Y && ballY < paddle1Y + paddle1Height) {
+        if (
+            ballY > paddle1Y - ballRadius &&
+            ballY < paddle1Y + ballRadius + paddle1Height
+        ) {
             ballSpeedX *= -1;
             const deltaY = ballY - (paddle1Y + paddle1Height / 2);
             ballSpeedY = deltaY * 0.35;
