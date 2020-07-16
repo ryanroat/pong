@@ -74,7 +74,7 @@ function ballInit() {
     // randomize ballSpeedY between -5 & 5
     ballSpeedY = rando(11) - 6;
     // ballSpeedX inversely proportional to ballSpeedY with random horizontal direction
-    ballSpeedX = (15 - Math.abs(ballSpeedY)) * (Math.random() < 0.5 ? -1 : 1);
+    ballSpeedX = (12 - Math.abs(ballSpeedY)) * (Math.random() < 0.5 ? -1 : 1);
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
 }
@@ -92,7 +92,7 @@ function ballReset() {
     ballSpeedY = rando(11) - 6;
     // reverse ballSpeedX and make proportion to ballSpeedY
     ballSpeedX =
-        -(ballSpeedX / Math.abs(ballSpeedX)) * (15 - Math.abs(ballSpeedY));
+        -(ballSpeedX / Math.abs(ballSpeedX)) * (12 - Math.abs(ballSpeedY));
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
 }
