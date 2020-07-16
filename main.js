@@ -82,6 +82,12 @@ function ballReset() {
     ballY = canvas.height / 2;
 }
 
+function drawNet() {
+    for (let i = 10; i < canvas.height; i += 40) {
+        colorRect(canvas.width / 2 - 1, i, 2, 20, 'white');
+    }
+}
+
 function drawField() {
     // draw blank black playing field
     colorRect(0, 0, canvas.width, canvas.height, 'black');
@@ -99,6 +105,8 @@ function drawField() {
 
         return;
     }
+    // display net
+    drawNet();
     // draw left player paddle
     colorRect(0, paddle1Y, paddleWidth, paddle1Height, 'white');
     // draw right player paddle
