@@ -87,11 +87,13 @@ function drawField() {
     colorRect(0, 0, canvas.width, canvas.height, 'black');
     // check for game over situation
     if (showingWinScreen) {
-        canvasContext.fillStyle = 'white';
+        const winner =
+            player1Score > player2Score ? 'Left Player' : 'Right Player';
 
+        canvasContext.fillStyle = 'white';
         canvasContext.fillText(
-            'GAME OVER - click to continue',
-            canvas.width / 2 - 50,
+            `GAME OVER - ${winner} wins! - click to continue`,
+            canvas.width / 2 - 100,
             100
         );
 
