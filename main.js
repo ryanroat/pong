@@ -2,7 +2,7 @@ const canvas = document.getElementById('gameCanvas');
 const canvasContext = canvas.getContext('2d');
 
 // target frames per second rate
-const FPS = 30;
+const FPS = 60;
 // initialize ball control variables
 let ballX;
 let ballY;
@@ -58,12 +58,11 @@ function colorCircle(centerX, centerY, radius, drawColor) {
 
 // initialize ball speed and direction
 function ballInit() {
-    // serve indicates ball X direction as -1 or 1
-    // serve =
-    // radomize ballSpeed X between 10 & 15
-    ballSpeedX = rando(6) + 9 * (Math.random() < 0.5 ? -1 : 1);
-    // randomize ballSpeedY between -10 & 10
-    ballSpeedY = rando(21) - 11;
+    // radomize ballSpeed X between 2 & 3 or -2 & -3
+    // ballSpeedX = 3 * (Math.random() < 0.5 ? -1 : 1);
+    ballSpeedX = (rando(3) + 3) * (Math.random() < 0.5 ? -1 : 1);
+    // randomize ballSpeedY between -3 & 3
+    ballSpeedY = rando(7) - 4;
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
 }
@@ -75,9 +74,9 @@ function ballReset() {
         showingWinScreen = true;
     }
     // reverse ballSpeedX
-    ballSpeedX = -(ballSpeedX / Math.abs(ballSpeedX)) * (rando(6) + 9);
+    ballSpeedX = -(ballSpeedX / Math.abs(ballSpeedX)) * (rando(3) + 3);
     // randomize ballSpeedY between -10 & 10
-    ballSpeedY = rando(21) - 11;
+    ballSpeedY = rando(7) - 4;
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
 }
@@ -154,7 +153,7 @@ function movement() {
         ) {
             ballSpeedX *= -1;
             const deltaY = ballY - (paddle1Y + paddle1Height / 2);
-            ballSpeedY = deltaY * 0.35;
+            ballSpeedY = deltaY * 0.2;
         } else {
             // point to player 2
             player2Score++;
@@ -166,7 +165,7 @@ function movement() {
         if (ballY > paddle2Y && ballY < paddle2Y + paddle2Height) {
             ballSpeedX *= -1;
             const deltaY = ballY - (paddle2Y + paddle2Height / 2);
-            ballSpeedY = deltaY * 0.35;
+            ballSpeedY = deltaY * 0.2;
         } else {
             // point to player 1
             player1Score++;
