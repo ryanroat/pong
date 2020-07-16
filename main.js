@@ -19,9 +19,9 @@ const paddle2Height = 100;
 let paddle2Y = canvas.height / 2 - paddle1Height / 2;
 
 // score vars
+const winningScore = 3;
 let player1Score = 0;
 let player2Score = 0;
-const winningScore = 3;
 let showingWinScreen = false;
 
 // returns a 'random' number btwn 1 and max inclusive
@@ -184,6 +184,16 @@ window.onload = () => {
 
     // draw field at FPS rate
     setInterval(updateField, 1000 / FPS);
+
+    // check for mouse click for game over screen
+    canvas.addEventListener('click', evt => {
+        console.log('click');
+        if (showingWinScreen) {
+            player1Score = 0;
+            player2Score = 0;
+            showingWinScreen = false;
+        }
+    });
 
     // move paddle1 to track mouse
     canvas.addEventListener('mousemove', function(evt) {
