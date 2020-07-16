@@ -19,9 +19,10 @@ const paddle2Height = 100;
 let paddle2Y = canvas.height / 2 - paddle1Height / 2;
 
 // score vars
-const winningScore = 3;
+const winningScore = 5;
 let player1Score = 0;
 let player2Score = 0;
+let showStartScreen = true;
 let showingWinScreen = false;
 
 // returns a 'random' number btwn 1 and max inclusive
@@ -29,6 +30,16 @@ function rando(max) {
     return Math.floor(Math.random() * Math.floor(max)) + 1;
 }
 
+// start screen
+function startScreen() {
+    canvasContext.fillStyle = 'white';
+    canvasContext.fillText(
+        `Get ${winningScore} or more points to win; must win by two.`,
+        canvas.width / 2 - 100,
+        100
+    );
+    canvasContext.fillText('click to continue', canvas.width / 2 - 37, 125);
+}
 // mouse position
 
 function calcMousePos(evt) {
@@ -70,7 +81,10 @@ function ballInit() {
 // reset ball location to center of canvas
 function ballReset() {
     // check for winning score
-    if (player1Score === winningScore || player2Score === winningScore) {
+    if (
+        (player1Score >= winningScore && player1Score >= player2Score + 2) ||
+        (player2Score >= winningScore && player2Score >= player1Score + 2)
+    ) {
         showingWinScreen = true;
     }
     // reverse ballSpeedX
@@ -90,6 +104,11 @@ function drawNet() {
 function drawField() {
     // draw blank black playing field
     colorRect(0, 0, canvas.width, canvas.height, 'black');
+    // check for new game situation
+    if (showStartScreen) {
+        startScreen();
+        return;
+    }
     // check for game over situation
     if (showingWinScreen) {
         const winner =
@@ -138,7 +157,7 @@ function computerMove() {
 }
 
 function movement() {
-    if (showingWinScreen) {
+    if (showStartScreen || showingWinScreen) {
         return;
     }
     computerMove();
@@ -183,7 +202,6 @@ function movement() {
 
 window.onload = () => {
     console.log('document loaded');
-    //
     ballInit();
     const updateField = () => {
         // updates canvas
@@ -197,10 +215,14 @@ window.onload = () => {
     // check for mouse click for game over screen
     canvas.addEventListener('click', evt => {
         console.log('click');
+        if (showStartScreen) {
+            showStartScreen = false;
+        }
         if (showingWinScreen) {
             player1Score = 0;
             player2Score = 0;
             showingWinScreen = false;
+            showStartScreen = true;
         }
     });
 
