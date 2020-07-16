@@ -7,7 +7,9 @@ const FPS = 60;
 let ballX;
 let ballY;
 const ballRadius = 10;
+// horizontal ball speed
 let ballSpeedX;
+// vertical ball speed
 let ballSpeedY;
 // let serve;
 
@@ -69,11 +71,10 @@ function colorCircle(centerX, centerY, radius, drawColor) {
 
 // initialize ball speed and direction
 function ballInit() {
-    // radomize ballSpeed X between 2 & 3 or -2 & -3
-    // ballSpeedX = 3 * (Math.random() < 0.5 ? -1 : 1);
-    ballSpeedX = (rando(3) + 3) * (Math.random() < 0.5 ? -1 : 1);
-    // randomize ballSpeedY between -3 & 3
-    ballSpeedY = rando(7) - 4;
+    // randomize ballSpeedY between -5 & 5
+    ballSpeedY = rando(11) - 6;
+    // ballSpeedX inversely proportional to ballSpeedY with random horizontal direction
+    ballSpeedX = (15 - Math.abs(ballSpeedY)) * (Math.random() < 0.5 ? -1 : 1);
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
 }
@@ -87,10 +88,11 @@ function ballReset() {
     ) {
         showingWinScreen = true;
     }
-    // reverse ballSpeedX
-    ballSpeedX = -(ballSpeedX / Math.abs(ballSpeedX)) * (rando(3) + 3);
-    // randomize ballSpeedY between -10 & 10
-    ballSpeedY = rando(7) - 4;
+    // randomize ballSpeedY between -5 & 5
+    ballSpeedY = rando(11) - 6;
+    // reverse ballSpeedX and make proportion to ballSpeedY
+    ballSpeedX =
+        -(ballSpeedX / Math.abs(ballSpeedX)) * (15 - Math.abs(ballSpeedY));
     ballX = canvas.width / 2;
     ballY = canvas.height / 2;
 }
@@ -173,6 +175,7 @@ function movement() {
             ballSpeedX *= -1;
             const deltaY = ballY - (paddle1Y + paddle1Height / 2);
             ballSpeedY = deltaY * 0.2;
+            // ballSpeedX = 10 - Math.abs(ballSpeedY);
         } else {
             // point to player 2
             player2Score++;
@@ -185,6 +188,7 @@ function movement() {
             ballSpeedX *= -1;
             const deltaY = ballY - (paddle2Y + paddle2Height / 2);
             ballSpeedY = deltaY * 0.2;
+            // ballSpeedX = 10 - Math.abs(ballSpeedY);
         } else {
             // point to player 1
             player1Score++;
