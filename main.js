@@ -21,7 +21,7 @@ const paddle2Height = 100;
 let paddle2Y = canvas.height / 2 - paddle1Height / 2;
 
 // score vars
-const winningScore = 5;
+const winningScore = 7;
 let player1Score = 0;
 let player2Score = 0;
 let showStartScreen = true;
@@ -140,21 +140,36 @@ function drawField() {
     // draw white ball
     colorCircle(ballX, ballY, ballRadius, 'white');
     // display scores
+    if (player2Score >= winningScore - 2) {
+        canvasContext.fillStyle = 'yellow';
+    }
+    if (player2Score >= winningScore - 1 && player2Score > player1Score) {
+        canvasContext.fillStyle = 'red';
+    }
     canvasContext.fillText(player1Score, 100, 100);
+
+    canvasContext.fillStyle = 'white';
+    if (player1Score >= winningScore - 2) {
+        canvasContext.fillStyle = 'yellow';
+    }
+    if (player1Score >= winningScore - 1 && player1Score > player2Score) {
+        canvasContext.fillStyle = 'red';
+    }
+
     canvasContext.fillText(player2Score, canvas.width - 100, 100);
 }
 
 function computerMove() {
     const paddle2YCenter = paddle2Y + paddle2Height / 2;
 
-    if (paddle2YCenter < ballY - 125) {
-        paddle2Y += 20;
-    } else if (paddle2YCenter < ballY - 30) {
-        paddle2Y += 7;
-    } else if (paddle2YCenter > ballY + 125) {
-        paddle2Y -= 20;
-    } else if (paddle2YCenter > ballY + 30) {
-        paddle2Y -= 7;
+    if (paddle2YCenter < ballY - 105) {
+        paddle2Y += 15;
+    } else if (paddle2YCenter < ballY - 45) {
+        paddle2Y += 5;
+    } else if (paddle2YCenter > ballY + 105) {
+        paddle2Y -= 15;
+    } else if (paddle2YCenter > ballY + 45) {
+        paddle2Y -= 5;
     }
 }
 
