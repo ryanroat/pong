@@ -21,7 +21,7 @@ const paddle2Height = 100;
 let paddle2Y = canvas.height / 2 - paddle1Height / 2;
 
 // score vars
-const winningScore = 5;
+const winningScore = 3;
 let player1Score = 0;
 let player2Score = 0;
 let showStartScreen = true;
@@ -140,7 +140,22 @@ function drawField() {
     // draw white ball
     colorCircle(ballX, ballY, ballRadius, 'white');
     // display scores
+    if (player2Score >= winningScore - 2) {
+        canvasContext.fillStyle = 'yellow';
+    }
+    if (player2Score >= winningScore - 1 && player2Score > player1Score) {
+        canvasContext.fillStyle = 'red';
+    }
     canvasContext.fillText(player1Score, 100, 100);
+
+    canvasContext.fillStyle = 'white';
+    if (player1Score >= winningScore - 2) {
+        canvasContext.fillStyle = 'yellow';
+    }
+    if (player1Score >= winningScore - 1 && player1Score > player2Score) {
+        canvasContext.fillStyle = 'red';
+    }
+
     canvasContext.fillText(player2Score, canvas.width - 100, 100);
 }
 
