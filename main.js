@@ -21,7 +21,7 @@ const paddle2Height = 100;
 let paddle2Y = canvas.height / 2 - paddle1Height / 2;
 
 // score vars
-const winningScore = 3;
+const winningScore = 7;
 let player1Score = 0;
 let player2Score = 0;
 let showStartScreen = true;
