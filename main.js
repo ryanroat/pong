@@ -21,10 +21,10 @@ let ballSpeedY;
 // let serve;
 
 // paddle details
-const paddleWidth = 10;
-const paddle1Height = 100;
+const paddleWidth = 15;
+const paddle1Height = 125;
 let paddle1Y = canvas.height / 2 - paddle1Height / 2;
-const paddle2Height = 100;
+const paddle2Height = 125;
 let paddle2Y = canvas.height / 2 - paddle1Height / 2;
 
 // score vars
