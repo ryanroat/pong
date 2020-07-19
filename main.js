@@ -5,8 +5,11 @@ const canvasContext = canvas.getContext('2d');
 canvas.width = canvas.clientWidth;
 canvas.height = canvas.clientHeight;
 
+// set canvas font
+canvasContext.font = '15px sans-serif';
+
 // target frames per second rate
-const FPS = 75;
+const FPS = 72;
 // initialize ball control variables
 let ballX;
 let ballY;
@@ -39,12 +42,13 @@ function rando(max) {
 // start screen
 function startScreen() {
     canvasContext.fillStyle = 'white';
+    canvasContext.font = '15px sans-serif';
     canvasContext.fillText(
         `Get ${winningScore} or more points to win; must win by two.`,
-        canvas.width / 2 - 100,
+        canvas.width / 2 - 150,
         100
     );
-    canvasContext.fillText('click to continue', canvas.width / 2 - 37, 125);
+    canvasContext.fillText('click to continue', canvas.width / 2 - 50, 150);
 }
 // mouse position
 
@@ -121,9 +125,10 @@ function drawField() {
             player1Score > player2Score ? 'Left Player' : 'Right Player';
 
         canvasContext.fillStyle = 'white';
+        canvasContext.font = '15px sans-serif';
         canvasContext.fillText(
             `GAME OVER - ${winner} wins! - click to continue`,
-            canvas.width / 2 - 100,
+            canvas.width / 2 - 150,
             100
         );
 
@@ -144,13 +149,15 @@ function drawField() {
     // draw white ball
     colorCircle(ballX, ballY, ballRadius, 'white');
     // display scores
+    canvasContext.font = '30px sans-serif';
+
     if (player2Score >= winningScore - 2) {
         canvasContext.fillStyle = 'yellow';
     }
     if (player2Score >= winningScore - 1 && player2Score > player1Score) {
         canvasContext.fillStyle = 'red';
     }
-    canvasContext.fillText(player1Score, 100, 100);
+    canvasContext.fillText(player1Score, canvas.width / 4, 100);
 
     canvasContext.fillStyle = 'white';
     if (player1Score >= winningScore - 2) {
@@ -160,7 +167,7 @@ function drawField() {
         canvasContext.fillStyle = 'red';
     }
 
-    canvasContext.fillText(player2Score, canvas.width - 100, 100);
+    canvasContext.fillText(player2Score, (canvas.width * 3) / 4, 100);
 }
 
 function computerMove() {
