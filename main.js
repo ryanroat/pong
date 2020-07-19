@@ -2,11 +2,11 @@ const canvas = document.getElementById('gameCanvas');
 const canvasContext = canvas.getContext('2d');
 
 // resize canvas to fill window
-canvas.width = window.innerWidth; // - 25;
-canvas.height = window.innerHeight; // - 25;
+canvas.width = canvas.clientWidth;
+canvas.height = canvas.clientHeight;
 
 // target frames per second rate
-const FPS = 60;
+const FPS = 75;
 // initialize ball control variables
 let ballX;
 let ballY;
